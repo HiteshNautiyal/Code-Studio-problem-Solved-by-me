@@ -1,0 +1,15 @@
+string removeDuplicate(string &s)
+{
+    // last index wali chahe previous ke same ho ya na ho usse append krna hi hai because last wali element end m check horhi h fir hum usse new string m append kr rhe hai
+   string res="";
+    for(int i=0;i<s.length();i++)
+    {
+        if(i<s.length()-1 and s[i]==s[i+1])
+            continue;
+        else
+            res.push_back(s[i]);
+    }
+    
+    
+    return res;
+}
