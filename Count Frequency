@@ -1,0 +1,19 @@
+vector<int> findFrequency(string S) {
+	// Write your code here.
+    //First, we count frequency of a string
+    vector<int> v;
+    int freq[26] = {0};
+    for(int i=0; i<S.length();i++)
+    {
+        
+        int index = S[i] - 'a';
+        freq[index]++;
+    }
+    //now, we print count of all letters in a string
+    for(int i=0;i<26;i++)
+    {
+        v.push_back(freq[i]);
+    }
+    return v;
+        
+}
