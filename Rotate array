@@ -1,0 +1,30 @@
+#include <bits/stdc++.h> 
+#include <iostream>
+using namespace std;
+
+int main() {
+    //if k=2, then, see janha s 'k'start horha h usse phle wali values end m aajayegi same sequence
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    int k;
+     cin>>k;
+    
+    vector<int> v;
+    for(int i=k;i<n;i++)
+    {
+        v.push_back(a[i]);//'k' to end tak value phle push ki
+    }
+    for(int i=0;i<k;i++)
+    {
+        v.push_back(a[i]);//then '0'to'k-1' tak ki value push ki
+    }
+    for(auto x: v)
+    {
+        cout<<x<<" ";//all vector ko pop krdia
+    }
+}
