@@ -1,0 +1,48 @@
+#include <bits/stdc++.h> 
+
+void lexico(int i, int n, vector<int> &v)//'&'becoz we store values in main fucntion that is used pass by refernce
+{
+    if(i>n)//base case: agr humara main wala 'i' hmare total space s jyda h toh hum knh store krenge then hum return krdenge recursion end...
+        return; 
+    
+    v.push_back(i);//first always push 
+    for(int j=0;j<10;j++)
+    {
+        int k = (i*10)+j; //for values add like (1*10 + 0 = 10)
+        lexico(k,n,v);//recusive call and chalta rhega jab tak base case hit nh ho jata 
+    }
+}
+
+
+vector<int> lexicographicalOrder(int n){
+	// Use Recursion because there is no array so we call fucntion till my answer store
+    
+    vector<int> v;//because return type is vector
+    for(int i=1;i<10;i++)//1 to 9 digit hi hote hai baaki toh bs aage lgte h fir values badh jati h ,like, 10,11,....so on
+    {
+        lexico(i,n,v);//call function till i==9
+    }
+    return v;
+}
+
+ /* Example : 1,2,3,4,5,6,7,8,9,10,11 
+    n = 11 
+    first, 1 print then uski family print hogi, then, 1 ki family mei 10 hota hai fir wo print then uski family and so on 
+    
+    Tree banado:
+    1 ki family: 10->11->12->.....->19 tak
+    then, 10 ki family: 100->101->102->.....->109 tak
+    so on 19 ki family tak
+    
+    then, 2 ki family: 20->21->22->.....->29 tak
+    same as above continue 
+    */
+    
+
+
+
+
+
+
+
+
