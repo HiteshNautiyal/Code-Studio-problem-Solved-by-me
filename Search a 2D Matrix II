@@ -1,0 +1,64 @@
+#include <bits/stdc++.h> 
+bool findInMatrix(int x, vector<vector<int>> &arr)
+{
+    /* This is a O(n^2) T.C
+    int row_length = arr.size();
+    bool flag = false;
+    int col_length = arr[0].size();
+    
+    for(int i=0;i<row_length;i++)
+    {
+        for(int j=0;j<col_length;j++)
+        {
+            if(arr[i][j] == x)
+            {
+                flag = true;
+                break;
+                
+            }
+                
+        }
+        if(flag)
+            break;
+    }
+    if(flag)
+        return true;
+    else
+        return false;
+        */
+    
+    //Now, Optimised way : O(logn)
+    
+    int row_length = arr.size();
+    int col_length = arr[0].size();
+    bool flag = false;
+    
+    //improtant point : row and column both are sorted way means when element in row 1 and col 2 is large than key so uss col ke niche row m sb large hi honge toh traverse krna hi kyu h time waste hoga...
+    
+    int start = 0; //yeh row wise bdega
+    int end = col_length - 1; //yeh column wise bdega
+    
+    while(start<row_length and end>=0)
+    {
+        if(arr[start][end]==x)//key found
+        {
+            flag = true;
+                break;
+        }
+        else if(arr[start][end] < x)//when our search value is smaller than key so hum same column pe niche row m jayenge becoz niche wala row same column m phle wale se large value hogi...
+        {
+            start++;
+        }
+        else if(arr[start][end] > x)//when our search value is greater than key then we go same row pe left column pe aate rhenge 
+        {
+            end--;
+        }
+            
+    }
+    if(flag)
+        return true;
+    else 
+        return false;
+    
+    
+}
