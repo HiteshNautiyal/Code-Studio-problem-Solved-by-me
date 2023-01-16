@@ -1,9 +1,6 @@
 #include <bits/stdc++.h> 
 
-bool compare(int i, int j)
-{
-    
-}
+
 long long maxSubarraySum(int arr[], int n)
 {
    /* this is a O(n^2)approach  
