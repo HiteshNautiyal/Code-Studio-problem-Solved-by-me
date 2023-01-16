@@ -1,0 +1,43 @@
+#include <bits/stdc++.h> 
+
+bool compare(int i, int j)
+{
+    
+}
+long long maxSubarraySum(int arr[], int n)
+{
+   /* this is a O(n^2)approach  
+    
+    long long max = 0;
+    
+    for(int i=0;i<n;i++)
+    {
+        long long sum =0;
+        for(int j=i;j<n;j++)
+        {
+        sum += arr[j];
+        if(max<sum)
+            max = sum;
+            
+        }
+    }
+    return max;
+    */
+    
+    long long sum = 0;
+    long long res = 0;
+    
+    for(int i=0;i<n;i++)
+    {
+        sum += arr[i];
+        
+        res = max(res, sum);
+        
+        if(sum < 1)
+            sum = 0;
+            
+    }
+    return res;
+    
+    
+}
