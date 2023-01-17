@@ -1,0 +1,26 @@
+Subsequence: jab hum complete string se kuch string delete krke ek string bnate h with same relative order 
+              Like Example, given string : abcdef 
+                            subsequence are : ace(a ke baad hi c h or c ke baad e ), abdf,etc...
+  
+ Substring: when we remove first and last element of that string and remaining characters of that string is called "substring". 
+                            
+ 
+ //We Solve this problem by using "Recursive Tree"!!!
+ 
+ int lcs(string s, string t)
+{
+    if(s.length()==0 or t.length()==0) //if anyone strings are empty, so, there is no common strings 
+        return 0;
+    
+    if(s[0] == t[0])//if both string first character are same so we include that and check for next character of both the strings
+    {
+        return 1+lcs(s.substr(1), t.substr(1));
+    }
+    else //when characters are not same then,
+    {
+        int option1 = lcs(s, t.substr(1)); //we go for string1 and ignore string2
+        int option2 = lcs(s.substr(1), t); // we go for string2 and ignore string1
+        
+        return max(option1, option2); // choose maximum length of both option & give common subsequence length 
+    }
+}
