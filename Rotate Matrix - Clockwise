@@ -1,0 +1,63 @@
+#include <bits/stdc++.h> 
+#include <bits/stdc++.h> 
+
+void rotateMatrix(vector<vector<int>> &mat, int n, int m)
+{
+    int row = 0;
+    int col = 0;
+    int last_row = n;
+    int last_col = m;
+    int prev;//jnh pe hum after rotation value put krenge
+    int curr;//before rotation means present pe indices jnh hoga
+ 
+    while(row < last_row and col < last_col)
+    {
+        if(row+1 == last_row or col+1 == last_col) 
+            break;
+        
+        prev = mat[row+1][col];//phle hum row wise rotate krenge bs only one step aage jayenge
+        
+        for(int i=col; i<last_col; i++)
+        {
+            curr = mat[row][i];
+            mat[row][i] = prev;
+            prev = curr;
+        }
+        row++;
+        
+        for(int i=row;i<last_row;i++)
+        {
+            curr = mat[i][last_col-1];
+            mat[i][last_col-1] = prev;
+            prev = curr;
+        }
+        last_col--;
+        
+        //these 2 below if condition are valid only for even size of matrix rotation like 4X4 matrix,etc...
+        if(row < last_row)
+        {
+            for(int i=last_col-1; i>=col; i--)
+            {
+                curr = mat[last_row-1][i];
+                mat[last_row-1][i] = prev;
+                prev = curr;
+                
+            }
+            
+        }
+        last_row--;
+        
+        if(col < last_col)
+        {
+            for(int i=last_row-1; i>=row; i--)
+            {
+                curr = mat[i][col];
+                mat[i][col] = prev;
+                prev = curr;
+            }
+        }
+        col++;
+        
+    }
+
+}
