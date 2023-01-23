@@ -1,0 +1,88 @@
+Explain Sudoku Solution :- Sudoku is a 9X9 matrix , 
+                           For Sudoku Soltuion conditions are: 
+                           1) in each row , all digits occur exactly once
+                           2) in each column, all digits occur exactly once
+                           3) each 3X3 grid, all digits occur exactly once
+concept : hum ek koi digit ko empty cell mein put krenge fir dekhenge ki kya yeh condition follow kr rha hai. If, Yes, toh baaki ka kaam recursion krega same , when, woh digit condition follow nahi kr pata hai toh hum second digit check kreneg...
+
+Algo : 
+        for(i -> 0 to 9)
+        for(j -> 0 to 9)
+        if cell -> empty
+        then, for(val -> 1 to 9)
+        if(isSafe)
+        Cell[i][j] = val
+        recursive call 
+        
+        now, use BACKTACKING
+        Cell[i][j] = 0 (means uss cell mein phle kya th ofcourse kuch nai ,i.e, empty or 0)
+        
+
+
+Code:
+
+#include <bits/stdc++.h> 
+
+bool is_safe(vector<vector<int>>& sudoku, int row, int col, int val)//this fucntion is for checking that digits filling in that cell is valid or not
+{
+    for(int i=0; i<sudoku.size(); i++)//
+    {
+        //check row
+        if(sudoku[row][i] == val)//same row ke different column m dekhenge ki value exist toh nh krti ?
+        return false;
+
+        //check column
+        if(sudoku[i][col] == val)//same column with different row ke sath check krenge ki value exist toh nh krti ?
+        return false;
+
+        //check 3X3 grid 
+        if(sudoku[3*(row/3)+ i/3][3*(col/3)+ i%3] == val)//example : row -> 0 then i->1 so this goes me (0,1) submatrix 
+        return false;
+    }
+    return true;
+}
+
+bool solve(vector<vector<int>>& sudoku)
+{
+    for(int row = 0; row < sudoku.size(); row++) //traverse every row
+    {
+        for(int col = 0; col < sudoku[0].size(); col++)//traverse every column
+        {
+            //check cell empty??
+            if(sudoku[row][col] == 0) //agr cell empty hai toh hi hum aage kaam krenge
+            {
+                for(int val=1;val<=9;val++)//value only use : 1 to 9
+                {
+                    if(is_safe(sudoku,row,col,val)){ //check uss cell m jo number hum put kr rhe hai kya woh valid h ??
+                    sudoku[row][col] = val;//valid h toh woh number put krdo
+
+                    bool check = solve(sudoku); // then hum sb value ke liye recursive call use krenge
+
+                    if(check) //when woh number valid hai all given condition then true return kro
+                    return true;
+                    else
+                    {
+                        //Backtracking
+                        sudoku[row][col] = 0; //otherwise, wapis uss cell ko empty krdo
+
+                    }
+
+                    
+
+                    
+
+                }
+
+            }
+            return false; //agr woh cell empty nh hai the return false
+            }
+        }
+    }
+    return true;//humne check krdiya complete sudoku or agr abhi tak koi bh false nh aaya means all digits put perfectly sudoku valid hai
+}
+
+void solveSudoku(vector<vector<int>>& sudoku)
+{
+	solve(sudoku);//call function to solve sudoku
+}
+     
