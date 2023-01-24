@@ -1,0 +1,68 @@
+#include <bits/stdc++.h> 
+
+bool is_safe(int newx, int newy, vector < vector < int >> & arr, int n, vector < vector < bool>> & vis)
+{
+    //x & y coordinated matrix ke andr lie hona chahiye and next cell 1 hona chhaiye and woh phle visit bh na ho
+    if((newx>=0 and newx<=n-1) and (newy>=0 and newy<=n-1) and (arr[newx][newy]==1) and (vis[newx][newy]==0))
+    {
+        return true;
+    }
+    else
+    return false;
+}
+
+void solve(int x, int y, vector < vector < int >> & arr, int n, vector<string> &ans, string path, vector < vector < bool >> & vis)
+{
+    //base case
+    if(x==n-1 and y==n-1) //destination m reach krlega toh ans store krdo
+    {
+        ans.push_back(path);
+        return;
+    }
+
+    vis[x][y] = 1;//next cell valid hai toh next cell m jane se phle uss cell jnh pe tum stand kr rhe ho usse 1 krdo jisse next time tumhe pta ho ki yeh cell visited hai
+        
+        //4 movement : D , L , R, U 
+
+    //Down
+    if(is_safe(x+1, y, arr, n, vis))
+    {
+        solve(x+1, y, arr, n, ans, path + 'D', vis);
+
+    }
+
+    //left
+    if(is_safe(x, y-1, arr, n, vis))
+    {
+        solve(x, y-1, arr, n, ans, path + 'L', vis);
+    }
+
+    //right
+    if(is_safe(x, y+1, arr, n, vis))
+    {
+        solve(x, y+1, arr, n, ans, path + 'R', vis);
+    }
+
+    //up
+    if(is_safe(x-1, y, arr, n , vis))
+    {
+        solve(x-1, y, arr, n, ans, path + 'U', vis);
+    }
+
+    vis[x][y] = 0; //Backtracking (jab end point mei phunch jao fir return krte waqt dekho ki uss cell ke around koi aur valid movement hai nhi hai toh usse 0 krte jao jisse agr tumhe ek time pe koi movement dikhe valid piche aate waqt toh firse tum destination mei ja pao and another output bn ske)
+}
+
+vector < string > searchMaze(vector < vector < int >> & arr, int n) {
+    
+    vector<string> ans;
+
+    string path = "";
+
+    vector<vector<bool>> visited(n, vector<bool> (n,0));
+
+    if(arr[0][0] == 0) // agar rat ka first starting cell hi zero(invalid) ho, so, woh next cell mei ja hi nh paega
+    return ans;
+
+    solve(0, 0, arr, n, ans, path, visited);
+    return ans;
+}
