@@ -1,0 +1,114 @@
+Queen Attack Directions :                                              north/up
+
+                                             north-west/digonal                         north-east/diagonal
+                              
+                              west/left                                QUEEN                                  east/right
+                              
+                                            south-west/diagonal                         south-east/diagonal
+                              
+                                                                      south / down 
+                                                                      
+                                                      So, there is 8 Direction 
+                                                      
+
+Conditions: 1) Each row -> 1 Queen
+            2) Each Column -> 1 Queen
+            3) No two Queen attack each other
+
+hmara kaam hai only 1 column with all row mein Queen put krke check and traverse krenge , then , remaining board recursion krega.
+
+Code:-
+
+#include <bits/stdc++.h> 
+
+void Store_Answer(vector<vector<int>> &board, vector<vector<int>> &ans, int n)
+{
+	vector<int> temp;
+
+	for(int i=0; i<n; i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			temp.push_back(board[i][j]);
+		}
+	}
+	ans.push_back(temp);
+}
+
+bool is_safe(int row, int col, vector<vector<int>> &board, int n)
+{
+	int x = row;
+	int y = col;
+    
+	//check for same row
+	while(y>=0)
+	{
+		if(board[x][y] == 1)
+		return false;
+
+		y--;
+	}
+
+	x = row;
+	 y = col;
+	 //check for north west diagonal
+
+	 while(x>=0 and y>=0)
+	 {
+		 if(board[x][y] == 1)
+		 return false;
+
+		 y--;
+		 x--;
+	 }
+
+	 x = row;
+	  y= col;
+     
+	 //check for south west diagonal
+	 while(x<n and y>=0)
+	 {
+		 if(board[x][y] == 1)
+		 return false;
+
+		 x++;
+		 y--;
+	 }
+
+	 return true;
+}
+void solve(int col, vector<vector<int>> &board, vector<vector<int>> &ans, int n)
+{
+	//base case
+	if(col == n)//all column fill then store answer
+	{
+		Store_Answer(board, ans, n);
+		return;
+	}
+
+	//solve 1 case 
+	for(int row = 0; row < n; row++) // 1 column mei all row traverse krenge hum baaki recursion
+	{
+		if(is_safe(row, col, board, n))
+		{
+			board[row][col] = 1;//agr woh cell safe h toh queen put krdo
+			solve(col+1, board, ans, n);//baaki ab uss column m nhi put krenge check for direct another column
+
+			//backtracking
+			board[row][col] = 0;//for new path checking we backtrack and again cell ko empty krenge
+		}
+	}
+}
+
+vector<vector<int>> nQueens(int n)
+{
+	vector<vector<int>> ans;
+
+	vector<vector<int>> board(n, vector<int> (n,0));
+
+	solve(0,board, ans, n);//hum first column pe hai abhi then call function
+
+	return ans;
+	
+}
+                                 
