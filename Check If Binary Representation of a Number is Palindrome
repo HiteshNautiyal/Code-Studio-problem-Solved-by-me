@@ -1,0 +1,31 @@
+#include <bits/stdc++.h> 
+bool checkPalindrome(long long N)
+{ 
+	//first we store all the binary numbers of a given number
+	vector<int> v;
+     
+     while(N > 0)
+        {
+           int rem = N%2;
+           v.push_back(rem);
+           
+           N = N/2;
+        }
+        
+    int start = 0;
+    int end = v.size()-1;
+
+	//now, we check that a binary number of a given number is a plaindrome or not???
+    
+    while(start < end)
+    {
+        if(v[start] != v[end])
+        return false;
+        
+        start++;
+        end--;
+        
+    }
+    return true;
+        
+}
