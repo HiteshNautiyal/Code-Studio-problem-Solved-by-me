@@ -1,0 +1,79 @@
+/*
+For QUICKSORT :- 
+
+only 2 steps required :- 1) first choose one element(called "pivot") and put on the right position of that element
+and satify that, [<e , e, >e] is called " Partiton Logic".
+
+2) recursion used.
+
+For Partiton Logic :-
+
+step 1 : Take pivot
+step 2 : count all element less than pivot
+step 3 : pivotindex -> starting index + count
+step 4 : now, satisfy condition => [<e, e, >e] 
+*/
+
+int partition(vector<int> &arr, int s, int e)
+{
+    int pivot = arr[s];//take first element as a pivot
+    int count = 0;
+
+    for(int i=s+1; i<=e; i++)
+    {
+        if(arr[i] <= pivot)//jo bhi element pivot s less hoga count increase hoga jisse pta chlega pivot ki right position
+        count++;
+    }
+
+    int pivotindex = s + count;//pivot right index/position
+
+    swap(arr[pivotindex], arr[s]);//then we swap first element of an array with their right indices
+    
+    int i = s, j = e;
+
+    //now, we satify the conditon that is : - [ <e, e, >e]
+
+    while(i < pivotindex and j > pivotindex)//starting jab tak pivot ke index tak nhi reach hoti and ending jab tak pivotindex tak nhi kam ho jati
+    {
+        while(arr[i] <= pivot)//agr pivot se less hai usse phle ke element than we only go to next indices
+        i++;
+
+        while(arr[j] > pivot)//agr pivot se greater than hai right ke element than we go to next previous indices
+        j--;
+
+        if(i<pivotindex and j>pivotindex) // agr dono upar loop ho jate hai done so, we swap if condition not satisfy
+        swap(arr[i++], arr[j--]);
+
+    }
+
+    return pivotindex;
+
+}
+
+void solve(int s, int e, vector<int> &arr)
+{
+    //base case
+    if(s>=e)
+    return;
+
+    //partion logic
+    int p = partition(arr, s, e);
+
+    //left part sort
+    solve(s, p-1, arr);
+    
+    //middle element(p) is sorted in quick sort so we sort their left and right part only
+
+
+    //right part sort
+    solve(p+1, e, arr);
+}
+
+
+#include <bits/stdc++.h> 
+vector<int> quickSort(vector<int> arr)
+{
+    solve(0, arr.size()-1, arr);//call function to solve quick sort
+
+    return arr;
+}
