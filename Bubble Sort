@@ -1,0 +1,24 @@
+/*
+TIME COMPLEXITY :- O(N^2)
+
+SPACE COMPLEXITY :- O(1)
+
+Where we Use?
+-> In these sorting method, in every ith round we get ith largest element
+*/ 
+
+#include <bits/stdc++.h> 
+void bubbleSort(vector<int>& arr, int n)
+{   
+    //n-1 rounds honge when total n rounds hai toh
+    for(int i=1;i<n;i++)
+    {
+        //after each rounds largest element sorted one by one in each rounds so we always decrease rounds in every rounds
+
+        for(int j=0; j<n-i; j++)
+        {
+            if(arr[j] > arr[j+1])
+            swap(arr[j], arr[j+1]);
+        }
+    }
+}
