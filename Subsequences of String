@@ -1,0 +1,32 @@
+#include <bits/stdc++.h> 
+
+void solve(string str, int i, vector<string> &result, string ans)
+{
+    //base case
+    if(i >= str.length())
+    {
+        if(ans.length() > 0)//becoz we don't want empty subset in our output
+        result.push_back(ans);
+        
+        return;
+    }
+
+    //exclude
+    solve(str, i+1, result, ans);
+
+    //include
+    char element = str[i];
+    ans.push_back(element);
+    solve(str, i+1, result, ans);
+}
+vector<string> subsequences(string str){
+    
+    vector<string> result;
+    string ans = "";
+
+    int i = 0;
+    solve(str, i, result, ans);
+    return result;
+    
+	
+}
