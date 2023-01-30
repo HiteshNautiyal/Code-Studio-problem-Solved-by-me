@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+void solve(string str, vector<string>& result, int index)
+{
+    //base case
+    if(index >= str.length())
+    {
+        
+        result.push_back(str);
+        
+        return;
+    }
+    
+    for(int i=index; i<str.length(); i++)
+    {
+        swap(str[i], str[index]);
+
+        solve(str, result, index+1);
+         
+         swap(str[i], str[index]);
+        
+    }
+}
+
+vector<string> generatePermutations(string &str)
+{
+    vector<string> result;
+
+    solve(str, result, 0);
+
+    sort(result.begin() , result.end()); //we use this for lexicographically order 
+    
+    return result;
+}
