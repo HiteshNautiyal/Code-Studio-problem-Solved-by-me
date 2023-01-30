@@ -1,0 +1,24 @@
+#include <bits/stdc++.h> 
+#include <bits/stdc++.h> 
+#include <vector>
+
+bool findTargetInMatrix(vector < vector < int >> & mat, int m, int n, int target) {
+    
+    int start = 0;
+    int end = n-1;
+    
+    //this is a two pointer approach
+    while(start < m and end >= 0)
+    {
+        int element = mat[start][end];
+
+        if(element == target)
+        return 1;
+
+        if(element < target)
+        start++;
+        else
+        end--;
+    }
+    return 0;
+}
