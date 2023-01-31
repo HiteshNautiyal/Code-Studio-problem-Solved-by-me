@@ -1,0 +1,24 @@
+
+int solve(int *input, int n, int val, int start, int end)
+{
+    //base case
+    if(start > end)
+    return -1;
+
+    int mid = start + (end-start)/2;
+
+    if(input[mid] == val)
+    return mid;
+
+    if(input[mid] < val)
+    solve(input, n, val, mid+1, end);
+    else
+    solve(input, n, val, start, mid-1);
+
+}
+
+int binarySearch(int *input, int n, int val)
+{
+    int x = solve(input, n, val, 0, n-1);
+    return x;
+}
