@@ -1,0 +1,49 @@
+#include <bits/stdc++.h> 
+/************************************************************
+
+    Following is the linkedList class structure:
+
+    class Node {
+    public:
+        int data;
+        Node *next;
+
+        Node(int val) {
+            this->data = val;
+            next = NULL;
+        }
+        ~Node() {
+            if (next != NULL) {
+                delete next;
+            }
+        }
+};
+
+************************************************************/
+void insertAtHead(Node* &head, int val)
+{
+    Node* temp = new Node(val);
+    
+    temp->next = head;
+    head= temp;
+}
+void insert(Node * ( & head), int n, int pos, int val) {
+     
+     if(pos == 0)
+     {
+         insertAtHead(head, val);
+         return;
+     }
+     
+     Node * temp = head;
+     int count = 0;
+     while(count < pos - 1)
+     {
+         temp = temp->next;
+         count++;
+
+     }
+     Node* Insert = new Node(val);
+     Insert->next = temp->next;
+     temp->next = Insert;
+}
