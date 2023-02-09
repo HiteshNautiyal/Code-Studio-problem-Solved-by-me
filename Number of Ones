@@ -1,0 +1,25 @@
+#include <bits/stdc++.h> 
+int countOnBits(int num) {
+	// Write your code here.
+	 int count=0;
+        int mask = 1; // its for comaprison 
+        for(int i=0;i<32;i++) // there are total 32 binary string
+        {
+            if( (num & mask) != 0) // 1&1 = 1 
+                count++;
+            /* 1011
+             & 0001
+             = 0001 
+             after mask = mask<<1 
+             
+             1011
+           & 0010
+           = 0010 
+           and so on...*/
+            
+            mask = mask << 1; // 0001 after left shift, 0010
+            
+        }
+        return count;
+	      
+}
