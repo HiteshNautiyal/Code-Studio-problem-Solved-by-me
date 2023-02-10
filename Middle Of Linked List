@@ -1,0 +1,45 @@
+#include <bits/stdc++.h> 
+#include <bits/stdc++.h> 
+
+//T.C :- O(N)+O(N/2) = O(N)
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+       class Node 
+        { 
+        public:
+            int data;
+            Node *next;
+            Node(int data) 
+            {
+               this->data = data;
+              this->next = NULL;
+            }
+        };
+
+*****************************************************************/
+int find_length(Node* head)
+{
+    int count = 0;
+    Node* temp = head;
+    while(temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+Node *findMiddle(Node *head) {
+    int len = find_length(head)/2;
+
+    Node* temp = head;
+    int count = 0;
+    while(count < len)
+    {
+        temp = temp->next;
+        count++;
+    }
+    return temp;
+
+}
