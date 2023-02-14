@@ -1,0 +1,41 @@
+/************************************************************
+
+    Following is the linked list node structure.
+    
+    class Node 
+    {
+        public:
+        int data;
+        Node* next;
+
+        Node(int data) 
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+    
+************************************************************/
+//In sorted List, if continuous element is same then we skip that element otherwise we accept that element...
+Node * uniqueSortedList(Node * head) {
+    if(head == NULL)
+    {
+        return NULL;
+    }
+
+    Node* curr = head;
+    while(curr->next != NULL)
+    {
+        if(curr->data == curr->next->data)
+        {
+            Node* next = curr->next->next;
+            Node* delete_node = curr->next;
+            delete(delete_node);
+            curr->next = next;
+        }
+        else{
+            curr = curr->next;
+        }
+    }
+    return head;
+}
