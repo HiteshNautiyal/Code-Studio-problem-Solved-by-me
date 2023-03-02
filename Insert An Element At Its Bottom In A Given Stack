@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+
+/*
+   phle hum given stack ke element ko safe rkhenge becoz hume wapis unhe stack mei put krna hai
+   then, we see if given stack is empty means we are in bottom at stack so we push the given element in the stack
+   then, we push other elements also in a given stack
+
+*/   
+void Solve(stack<int>& myStack, int x)
+{
+    //base case
+    if(myStack.empty())
+    {
+        myStack.push(x);
+        return;
+    }
+
+    int num = myStack.top();
+    myStack.pop();
+
+    Solve(myStack, x);
+    myStack.push(num);
+}
+stack<int> pushAtBottom(stack<int>& myStack, int x) 
+{
+    Solve(myStack, x);
+    return myStack;
+}
