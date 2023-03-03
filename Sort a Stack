@@ -1,0 +1,38 @@
+#include <bits/stdc++.h> 
+
+/*
+  sbse phle stack ke elements ko side m rkhlo jab stack empty hojae then we insert in sorted way
+*/  
+
+void sortedInsert(stack<int> &stack, int num)
+{
+	//base case
+	//agr stack empty hai toh normally push element or stack ke jo element hogya woh safe side m jo element rkha h usse chota hoga tbhi we push wo safe side element in a stack
+	
+        if(stack.empty() or (!stack.empty() && stack.top() < num)) {
+          stack.push(num);
+		  return;
+        }
+		
+	int x = stack.top();
+	stack.pop();
+
+	//recursive case
+	sortedInsert(stack, num);
+
+	stack.push(x);	
+}
+void sortStack(stack<int> &stack)
+{
+	//base case
+	if(stack.empty())
+	return;
+
+	int num = stack.top();
+	stack.pop();
+
+	//recursive case
+	sortStack(stack);
+
+	sortedInsert(stack, num);
+}
