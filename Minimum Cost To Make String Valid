@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+/*
+  In these Question, we want vlid parentheses like, {{}}}} if we change second last closed bracket into open bracket
+  we convert into valid expression and answer should be 1.
+  
+  Firstly , we create a stack if stack top element is open bracket so first we
+  push it then we pop it and if closed bracket then we push it count1 for count
+  of open bracket and count2 for closed bracket there is an formula for return
+  answer.
+*/
+int findMinimumCost(string str) {
+  //odd condition(isme valid string ho hi nh skta)
+  if(str.length()%2 == 1)
+  return -1;
+
+  stack<char> s;
+  for(int i=0; i<str.length(); i++)
+  {
+    char ch = str[i];
+    if(ch == '{')
+    s.push(ch);
+    else
+    {
+
+      //when closed bracket
+      if(!s.empty() and s.top() == '{')
+      {
+        s.pop();
+
+      }
+      else
+      {
+        s.push(ch);
+      }
+    }
+   
+  }
+   //stack contains invalid expression
+    int count1 =0, count2 = 0;
+    while(!s.empty())
+    {
+      if(s.top() == '{')
+      count1++;
+      else
+      {
+        count2++;
+      }
+      s.pop();
+    }
+
+    int ans = (count1+1)/2 + (count2+1)/2;
+    return ans;
+  
+}
